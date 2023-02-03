@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
@@ -23,15 +23,21 @@
             <div>
                 <div>
                     <h3>Search for a City:</h3>
-                    <form>
-                        <input type="text" autofocus="true" name="city name">
-                        <button type="submit">Search</button>
+                    <form id="user-form" action="" onsubmit="return false;">
+                        
+                        <input id="user-input" type="text" autofocus="true" >
+                        <input type="submit" value="Search">
+                        
                     </form>
                 </div>
                 <div>
-                    <div></div>
-                    
+                    <ul id=search-history class="search-history"></ul>
+
                 </div>
+            </div>
+            <div>
+                <div id="forecast-today"></div>
+                <div id="forecast"></div>
             </div>
         </div>
         <div></div>
@@ -44,8 +50,8 @@
 
 
 
-
-    <script src="/assets/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
