@@ -20,13 +20,13 @@
 </head>
 
 <body class="flex-column min-100-vh">
-    <header class="hero">
-        <h1 class="app-title">Weather Dashboard</h1>
+    <header class="min-100-vw">
+        <h1 class="app-title text-center bg-info">Weather Dashboard</h1>
     </header>
-    <div class="flex-row align-center justify-center min-100-vh bg-primary">
-        <div class="col-12 col-md-9 flex-column align-center bg-light p-5">
-            <div class="col-3">
-                <div>
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="col-sm-12 col-md-12 d-flex flex-wrap justify-content-center">
                     <h3>Search for a City:</h3>
                     <form id="user-form" action="" onsubmit="return false;">
                         
@@ -36,13 +36,13 @@
                     </form>
                 </div>
                 <div>
-                    <ul id=search-history class="search-history"></ul>
+                    <ul id=search-history class="search-history d-flex flex-sm-column flex-md-row flex-lg-row align-items-center mt-3 ml-2 mr-3 justify-content-center flex-wrap"></ul>
 
                 </div>
             </div>
-            <div class="forecast-container col-9">
-                <div id="forecast-today" class="forecast row"></div>
-                <ul id="forecast" class="forecast-item row-12"></ul>
+            <div class="forecast-container col-sm-12 d-flex justify-content-center">
+                <div id="forecast-today" class="forecast"></div>
+                <ul id="forecast" class="forecast-item "></ul>
             </div>
         </div>
         <div></div>
