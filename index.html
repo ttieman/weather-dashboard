@@ -10,18 +10,15 @@
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <!--linking section for all style sheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
 <body class="flex-column min-100-vh">
     <header class="min-100-vw">
-        <h1 class="app-title text-center bg-info">Weather Dashboard</h1>
+        <h1 class="app-title text-center bg-info">Weather Dashboard</h1>   <!--header for the page -->
     </header>
     <div class="">
         <div class="">
@@ -29,20 +26,25 @@
                 <div class="col-sm-12 col-md-12 d-flex flex-wrap justify-content-center">
                     <h3>Search for a City:</h3>
                     <form id="user-form" action="" onsubmit="return false;">
-                        
-                        <input id="user-input" type="text" autofocus="true" >
+                                                                                    <!--submit form -->
+                        <input id="user-input" type="text" autofocus="true">
                         <input type="submit" value="Search">
-                        
+
                     </form>
                 </div>
-                <div>
-                    <ul id=search-history class="search-history d-flex flex-sm-column flex-md-row flex-lg-row align-items-center mt-3 ml-2 mr-3 justify-content-center flex-wrap"></ul>
-
+                <div class="d-flex row-sm-12 flex-wrap justify-content-center">
+                    <ul id=search-history
+                        class="search-history d-flex flex-sm-column flex-md-col flex-lg-col align-items-center mt-3  mr-10 justify-content-center flex-wrap">   <!--search history section -->
+                    </ul>
+                    <div class="flex-sm-column col-9 flex-md-row ml-6 w-50 justify-content-center align-items-center">
+                        <div id="forecast-today"
+                            class="forecast bg-secondary text-center rounded ml-2 justify-content-center align-items-center flex-grow-1">   <!--todays forecast section section -->
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="forecast-container col-sm-12 d-flex justify-content-center">
-                <div id="forecast-today" class="forecast"></div>
-                <ul id="forecast" class="forecast-item "></ul>
+                <ul id="forecast" class="forecast-item w-100 col-sm-12"></ul>    <!--5 day forecast  section -->
             </div>
         </div>
         <div></div>
@@ -56,6 +58,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--linking section for all the scripts-->
     <script src="./assets/js/script.js"></script>
 </body>
 

@@ -1,13 +1,13 @@
 var searchBtn = $('#searchbutton');       //selector for the search button 
 var formEl = $("#user-form");   //selector for the form submitted by user
 var searchHistoryList = $("#search-history"); //this is the selector for the search history list
-var cityName ;
+var cityName;
 var searchValue;
 
 $(document).ready(function () {  // when document is ready execute this code 
-    function getWeatherData(){
+    function getWeatherData() {
         fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=13b327d72629cc55be2f3a95ad74959a&units=imperial")
-            .then(response => {
+            .then(response => {             //this is the fetch request for the data from open weather api 
                 if (!response.ok) {
                     throw Error(response.statusText);
                 } else {
@@ -32,24 +32,25 @@ $(document).ready(function () {  // when document is ready execute this code
 
 
                         cityButton.click(function () {        //supposed to handle the click for city button 
-                            
-                           cityName = cityButton.text();
-                            getWeatherData();
 
+                            cityName = cityButton.text();
+
+                            getWeatherData();
+                            $('#forecast-today').css("display", "block");
                         })
                         cityList.append(cityItem);  // appends the button to the LI
                         $('#user-input').val(""); //empties the submission field
                     });
 
                 } else {
-                    alert("that already exists");  // alerts if there is already a value with the same name as one submitted in local storage
+
                 }
 
-                console.log(data);
-                var forecast = data.list;
+                console.log(data); // console logs the data pulled
+                var forecast = data.list; // assigns the list inside the data to forecast
 
-                var fiveDayForecast = [];
-                for (let i = 0; i < forecast.length; i += 8) {
+                var fiveDayForecast = [];    // declares and array called 5 day forecast
+                for (let i = 0; i < forecast.length; i += 8) {    //for each loop that will go through and pull set data to variables
                     let date = new Date(forecast[i].dt * 1000);
                     let formattedDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
                     let temperature = forecast[i].main.temp;
@@ -58,7 +59,7 @@ $(document).ready(function () {  // when document is ready execute this code
                     let windSpeed = forecast[i].wind.speed;
                     let humidity = forecast[i].main.humidity;
 
-                    fiveDayForecast.push({
+                    fiveDayForecast.push({    // pushes the data data to each list item as an object
                         date: formattedDate,
                         temperature: temperature,
                         conditions: conditions,
@@ -66,8 +67,8 @@ $(document).ready(function () {  // when document is ready execute this code
                         humidity: humidity
                     });
                 }
-                let currentForecast = fiveDayForecast[0];
-                let cityNameEl = $("<p>").text(searchValue).addClass('city-name');
+                let currentForecast = fiveDayForecast[0];    // gets current day and shows it as a larger block 
+                let cityNameEl = $("<p>").text(searchValue).addClass('city-name');  //this is the start of all the populated data on the screen 
                 let dateEl = $("<p>").text(currentForecast.date);
 
                 let temperatureEl = $("<p>").text("Temperature: " + currentForecast.temperature + "°F");
@@ -82,7 +83,7 @@ $(document).ready(function () {  // when document is ready execute this code
                 foreCastList.empty();
                 fiveDayForecast.forEach(function (day) {
 
-                    let forecastItem = $("<li>");
+                    let forecastItem = $("<li>").addClass("d-flex").addClass("flex-wrap");
                     let date = $("<p>").text(day.date);
 
                     let temperature = $("<p>").text("Temperature: " + day.temperature + "°F");
@@ -91,50 +92,52 @@ $(document).ready(function () {  // when document is ready execute this code
 
                     forecastItem.append(date, temperature, windSpeed, humidity);
 
-                    foreCastList.append(forecastItem);
+                    foreCastList.append(forecastItem);// end of data population to the screen 
 
                 });
 
             })
-            .catch(error => {
+            .catch(error => {    // catches error and sets the content to displat not a city kinda like a 404 error but tells the user the problem was the input
                 console.error(error);
                 $('#forecast-today').empty();
                 $('#forecast').empty();
                 $('#forecast').append("<h2>").text("That is not a city");
-               
+
             });
-        }
+    }
 
-    var cityNames = JSON.parse(localStorage.getItem("cityNames")) || [];
+    var cityNames = JSON.parse(localStorage.getItem("cityNames")) || [];  // handles the retrieving the list of city names from storage 
 
-    var cityList = $("#search-history");
-    cityList.empty();
-    
-    $.each(cityNames, function (index, cityName) {
-      let cityButton = $("<button>").text(cityName);
-      let cityItem = $('<li>').append(cityButton);
-    
-      cityButton.click(function () {
-        searchValue = cityButton.text();
-        getWeatherData();
-      })
-      cityList.append(cityItem);
+    var cityList = $("#search-history");   // this is the block of the buttons that is the search history
+    cityList.empty();  // empties the list each search 
+
+    $.each(cityNames, function (index, cityName) {   // populates the buttons on the screen 
+        let cityButton = $("<button>").text(cityName);
+        let cityItem = $('<li>').append(cityButton);
+
+        cityButton.click(function () {     // click handler for search histy buttons
+            searchValue = cityButton.text();
+            getWeatherData();
+            $('#forecast-today').css("display", "block");
+        })
+        cityList.append(cityItem);
     });
 
     formEl.on('submit', function (event) {  //submit form handler
         event.preventDefault();  // prevent default 
-        
+
         cityName = $('#user-input').val();    //city name will = the value of the submission form
         searchValue = cityName;
         var cityNames = JSON.parse(localStorage.getItem("cityNames")) || [];  //gets and parses citynames stored in local storage
-        
-        getWeatherData();
+
+        getWeatherData();   // gets the data
+        $('#forecast-today').css("display", "block");   // displays the today forecast 
     }
 
 
-       
-            
-           
+
+
+
     );
 
 });
